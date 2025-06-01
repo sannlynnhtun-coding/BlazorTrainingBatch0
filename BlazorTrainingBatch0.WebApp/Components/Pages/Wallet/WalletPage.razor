@@ -1,0 +1,54 @@
+﻿@page "/wallet"
+
+<PageTitle>Wallet</PageTitle>
+
+<MudBadge Content="@Wallets.Count" Color="Color.Error" Overlap="true" Bordered="true" Class="mx-6 my-4">
+    <MudButton Color="Color.Error" Variant="Variant.Filled" DropShadow="false">Security Issues</MudButton>
+</MudBadge>
+
+<MudButton Variant="Variant.Filled">@Wallets.Count</MudButton>
+
+<MudTextField @bind-Value="requestModel.WalletUserName" Label="User Name" Variant="Variant.Text"></MudTextField>
+<MudTextField @bind-Value="requestModel.FullName" Label="Full Name" Variant="Variant.Text"></MudTextField>
+<MudTextField @bind-Value="requestModel.MobileNo" Label="Mobile No" Variant="Variant.Text"></MudTextField>
+<MudTextField @bind-Value="requestModel.Balance" Label="Balance" Variant="Variant.Text"></MudTextField>
+<MudButton OnClick="Save" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Size="Size.Medium">
+    Save
+</MudButton>
+
+<MudDataGrid T="WalletModel" Items="@Wallets">
+    <Columns>
+        <PropertyColumn Property="x => x.WalletUserName" />
+        <PropertyColumn Property="x => x.FullName" />
+        <PropertyColumn Property="x => x.MobileNo" />
+        <PropertyColumn Property="x => x.Balance" Title="Category" />
+        <TemplateColumn CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="() => Edit(context.Item)" />
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="WalletModel" />
+    </PagerContent>
+</MudDataGrid>
+
+
+@code {
+    public string TextValue { get; set; }
+
+    private WalletModel requestModel = new();
+
+    private List<WalletModel> Wallets { get; set; } = new();
+
+    private void Save()
+    {
+        Wallets.Add(requestModel);
+        requestModel = new();
+    }
+
+    private void Edit(WalletModel model)
+    {
+        requestModel = model;
+    }
+}

@@ -1,13 +1,16 @@
 using BlazorTrainingBatch0.Domain;
 using BlazorTrainingBatch0.WebApp.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDomain();
+//builder.Services.AddDomain();
 
 var app = builder.Build();
 

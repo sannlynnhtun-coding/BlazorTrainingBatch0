@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="8.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlazorTrainingBatch0.Database\BlazorTrainingBatch0.Database.csproj" />
     <ProjectReference Include="..\BlazorTrainingBatch0.Domain\BlazorTrainingBatch0.Domain.csproj" />
   </ItemGroup>
