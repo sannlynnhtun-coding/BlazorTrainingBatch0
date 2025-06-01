@@ -1,4 +1,6 @@
 ﻿@page "/wallet"
+@inject IWalletService WalletService
+@inject ILogger<WalletPage> Logger
 
 <PageTitle>Wallet</PageTitle>
 
@@ -25,30 +27,10 @@
         <TemplateColumn CellClass="d-flex justify-end">
             <CellTemplate>
                 <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="() => Edit(context.Item)" />
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Delete" OnClick="() => Delete(context.Item)" />
             </CellTemplate>
         </TemplateColumn>
     </Columns>
-    <PagerContent>
-        <MudDataGridPager T="WalletModel" />
-    </PagerContent>
 </MudDataGrid>
 
-
-@code {
-    public string TextValue { get; set; }
-
-    private WalletModel requestModel = new();
-
-    private List<WalletModel> Wallets { get; set; } = new();
-
-    private void Save()
-    {
-        Wallets.Add(requestModel);
-        requestModel = new();
-    }
-
-    private void Edit(WalletModel model)
-    {
-        requestModel = model;
-    }
-}
+<MudPagination BoundaryCount="2" MiddleCount="5" Count="pageCount" SelectedChanged="PageChanged" Class="mt-4" />

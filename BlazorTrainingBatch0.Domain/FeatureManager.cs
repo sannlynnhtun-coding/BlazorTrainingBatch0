@@ -1,4 +1,7 @@
-﻿using BlazorTrainingBatch0.Domain.Features;
+﻿using BlazorTrainingBatch0.Database.AppDbContextModels;
+using BlazorTrainingBatch0.Domain.Features;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,14 @@ namespace BlazorTrainingBatch0.Domain
         {
             services.AddScoped<IWalletRepo, WalletRepo>();
             services.AddScoped<IWalletService, WalletService>();
+        }
+
+        public static void AddDatabase(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer("DbConnection"), 
+                ServiceLifetime.Transient, 
+                ServiceLifetime.Transient);
         }
     }
 }

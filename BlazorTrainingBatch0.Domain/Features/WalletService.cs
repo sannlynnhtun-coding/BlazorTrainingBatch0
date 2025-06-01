@@ -22,5 +22,17 @@ namespace BlazorTrainingBatch0.Domain.Features
             var lst = await _walletRepo.GetWalletListAsync(pageNo, pageSize);
             return lst;
         }
+
+        public async Task<WalletResponseMdoel> CreateWalletAsync(WalletRequestModel requestModel)
+        {
+            // validation
+            // check if wallet exists
+            // create wallet
+            // save changes
+            // await _walletRepo.CreateWalletAsync(model);
+
+            var model = await _walletRepo.CreateWalletAsync(requestModel);
+            return model;
+        }
     }
 }
